@@ -87,7 +87,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="https://placehold.co/400x250/34D399/ffffff?text=University+Friends" alt="University Memory Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
+                    <img src="./20250918_145718.jpeg" alt="University Memory Image" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Campus Life & Memories</p>
                         <p class="text-xs text-gray-500 mt-1">A photo with friends or classmates from a memorable university event.</p>
@@ -95,10 +95,10 @@
                 </div>
 
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="https://placehold.co/400x250/4F46E5/ffffff?text=Working+on+IoT+Project" alt="Working on Projects Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
+                    <img src="./20250918_132243.jpeg" alt="Thesis signature" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
-                        <p class="font-semibold text-gray-800 text-base">Project Development Time</p>
-                        <p class="text-xs text-gray-500 mt-1">A photo of me or my team working on the IoT or wind turbine project.</p>
+                        <p class="font-semibold text-gray-800 text-base">Thesis Signature</p>
+                        <p class="text-xs text-gray-500 mt-1">A photo of me or my thesis supervisor.</p>
                     </div>
                 </div>
 
@@ -128,15 +128,9 @@
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <img 
                         id="profile-image"
-                        src="https://placehold.co/200x200/4F46E5/ffffff?text=MRK" 
-                        alt="Md. Roni Khan Profile Photo Placeholder" 
+                        src="./image.jpeg" alt="Md. Roni Khan Professional Profile Photo" 
                         class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
                     >
-                    <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="displayProfilePhoto(event)">
-                    
-                    <button onclick="document.getElementById('photo-input').click()" class="mt-3 text-xs text-gray-600 hover:text-accent-blue font-medium transition duration-200">
-                        Change Photo (Local)
-                    </button>
                 </div>
 
                 <div class="flex-grow text-center md:text-left">
@@ -367,20 +361,6 @@
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
         
         let activeSectionId = 'gallery';
-        
-        /**
-         * Sets the profile photo using a locally selected file.
-         */
-        function displayProfilePhoto(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('profile-image').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
         
         /**
          * Toggles section visibility and updates navigation highlighting.
