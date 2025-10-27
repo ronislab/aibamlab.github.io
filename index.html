@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roni Khan - Professional Portfolio</title>
-    <!-- Load Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind for custom colors and font -->
     <script>
         tailwind.config = {
             theme: {
@@ -23,7 +21,6 @@
             }
         }
     </script>
-    <!-- Inter Font Link -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
@@ -65,35 +62,30 @@
 </head>
 <body class="bg-secondary-gray font-sans text-gray-800">
 
-    <!-- Header & Navigation -->
     <header class="bg-white shadow-lg sticky top-0 z-20">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-extrabold text-primary-blue">
                 Roni Khan
             </h1>
             <nav id="main-nav" class="space-x-4 text-sm font-medium hidden sm:block">
-                <!-- Data attributes link the nav item to the section ID -->
-                <a href="#" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
-                <a href="#" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
-                <a href="#" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Education</a>
-                <a href="#" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Research</a>
-                <a href="#" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Projects</a>
-                <a href="#" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Skills</a>
+                <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Projects</a>
+                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Skills</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
 
-        <!-- Visual Showcase / Gallery Section (The default view/homepage) -->
         <section id="gallery" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline: Achievements, Projects & Memories</h3>
             <p class="text-gray-600 mb-8">This gallery showcases a mix of my technical project results, academic achievements, university memories, and personal work time.</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 
-                <!-- Gallery Item 1: University Memory -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <img src="https://placehold.co/400x250/34D399/ffffff?text=University+Friends" alt="University Memory Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
@@ -102,7 +94,6 @@
                     </div>
                 </div>
 
-                <!-- Gallery Item 2: Working on Projects -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <img src="https://placehold.co/400x250/4F46E5/ffffff?text=Working+on+IoT+Project" alt="Working on Projects Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
@@ -111,7 +102,6 @@
                     </div>
                 </div>
 
-                <!-- Gallery Item 3: Academic Achievement -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" alt="Achievement/Award Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
@@ -120,8 +110,7 @@
                     </div>
                 </div>
 
-                 <!-- Gallery Item 4: Research/Code Output -->
-                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" alt="Deep Learning Segmentation Result Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Research Visualization </p>
@@ -132,12 +121,10 @@
             </div>
         </section>
 
-        <!-- Hero / Profile Section -->
         <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
             <h3 class="section-header text-3xl font-bold text-gray-900">Professional Profile & Summary</h3>
             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
                 
-                <!-- Profile Image & Uploader -->
                 <div class="flex-shrink-0 flex flex-col items-center">
                     <img 
                         id="profile-image"
@@ -145,16 +132,13 @@
                         alt="Md. Roni Khan Profile Photo Placeholder" 
                         class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
                     >
-                    <!-- Hidden File Input -->
                     <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="displayProfilePhoto(event)">
                     
-                    <!-- Trigger Button for File Input -->
                     <button onclick="document.getElementById('photo-input').click()" class="mt-3 text-xs text-gray-600 hover:text-accent-blue font-medium transition duration-200">
                         Change Photo (Local)
                     </button>
                 </div>
 
-                <!-- Text Content -->
                 <div class="flex-grow text-center md:text-left">
                     <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Md. Roni Khan</h2>
                     
@@ -162,21 +146,17 @@
                         A highly motivated student, specializing in the convergence of Deep Learning, Machine Learning in the Biomedical Engineering and Sustainable Agriculture fields. I am actively seeking research opportunities to leverage AI for impactful engineering solutions.
                     </p>
 
-                    <!-- Contact/Social Links & CV Download -->
                     <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium mt-4">
                         
-                        <!-- CV Download Button -->
                         <a href="CV - Copy.docx" download class="btn-primary flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Download CV
                         </a>
 
-                        <!-- Email -->
                         <a href="mailto:roni.19eee132@gstu.edu.bd" class="btn-secondary flex items-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 12H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2z"></path></svg>
                             Email
                         </a>
-                        <!-- LinkedIn -->
                         <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="btn-secondary flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
                             LinkedIn
@@ -187,7 +167,6 @@
         </section>
 
 
-        <!-- Research Interests Section -->
         <section id="interests" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Core Research Interests</h3>
             <p class="text-gray-700 leading-relaxed mb-4">
@@ -202,59 +181,57 @@
             <h4 class="text-xl font-bold mt-8 mb-2 text-gray-700">Language Proficiency</h4>
             <ul class="list-disc ml-5 text-gray-700 space-y-1">
                 <li><strong>Bangla:</strong> Native Speaker</li>
-                <li><strong>English:<strong> Fluent (Reading, Writing, Listening, Speaking)</li>
+                <li><strong>English:</strong> Fluent (Reading, Writing, Listening, Speaking)</li>
             </ul>
         </section>
 
         <section id="education" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-    <h3 class="section-header text-2xl font-semibold">Education</h3>
-    
-    <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-            <div>
-                <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
-                <p class="text-accent-blue font-medium">Gopalganj Science and Technology University</p>
+            <h3 class="section-header text-2xl font-semibold">Education</h3>
+            
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
+                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">Expected September 2025</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    <strong>CGPA: 3.89 out of 4.00</strong> (1st position in the batch)
+                </p>
             </div>
-            <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">Expected September 2025</span>
-        </div>
-        <p class="text-gray-700 text-sm mt-2">
-            <strong>CGPA: 3.89 out of 4.00</strong> (1st position in the batch)
-        </p>
-    </div>
 
-    <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-            <div>
-                <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
-                <p class="text-accent-blue font-medium">Government Gournadi University College</p>
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
+                        <p class="text-accent-blue font-medium">Government Gournadi University College</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    <strong>GPA: 4.08 OUT OF 5.00</strong>
+                </p>
             </div>
-            <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
-        </div>
-        <p class="text-gray-700 text-sm mt-2">
-            <strong>GPA: 4.08 OUT OF 5.00</strong>
-        </p>
-    </div>
 
-    <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-            <div>
-                <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
-                <p class="text-accent-blue font-medium">Azahar Uddin High School</p>
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
+                        <p class="text-accent-blue font-medium">Azahar Uddin High School</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    <strong>GPA: 3.94 out of 5.00</strong>
+                </p>
             </div>
-            <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
-        </div>
-        <p class="text-gray-700 text-sm mt-2">
-            <strong>GPA: 3.94 out of 5.00</strong>
-        </p>
-    </div>
-    
-</section>
+            
+        </section>
 
-        <!-- Research Section (Publications) -->
         <section id="research" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Research & Publications</h3>
 
-            <!-- Published & Accepted Sub-Section -->
             <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">1. Published & Accepted</h4>
             
             <div class="mb-5 p-4 border-l-4 border-primary-blue/50 transition hover:border-primary-blue duration-300">
@@ -271,7 +248,6 @@
             </div>
 
 
-            <!-- Under Review Sub-Section -->
             <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">2. Under Review</h4>
             
             <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
@@ -280,7 +256,6 @@
             </div>
 
 
-            <!-- Working Paper/Thesis Sub-Section -->
             <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis</h4>
             
             <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
@@ -294,18 +269,15 @@
 
         </section>
         
-        <!-- Projects Section -->
         <section id="projects" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Undergraduate Projects</h3>
             
-            <!-- Project 1 -->
             <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
                 <h4 class="text-xl font-bold">IoT-based automatic car accident detection and sending a rescue message</h4>
                 <p class="text-primary-blue font-medium text-sm">Course Project</p>
                 <p class="text-gray-700 text-sm mt-2">Developed an automated system utilizing IoT sensors to instantly detect car accidents and transmit rescue messages with location data, improving emergency response times.</p>
             </div>
 
-            <!-- Project 2 -->
             <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
                 <h4 class="text-xl font-bold">Portable wind turbine generator for mobile and low-wattage charging device</h4>
                 <p class="text-primary-blue font-medium text-sm">Competitive Project</p>
@@ -313,7 +285,6 @@
             </div>
         </section>
         
-        <!-- Skills Section -->
         <section id="skills" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Technical Skills</h3>
             
@@ -344,7 +315,6 @@
 
         </section>
 
-        <!-- Training and Activities Section -->
         <section id="training" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Training & Activities</h3>
             
@@ -365,18 +335,15 @@
 
     </main>
 
-    <!-- Footer -->
     <footer id="contact" class="bg-gray-800 text-white py-8 mt-8">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h3 class="text-2xl font-bold mb-3">Let's Connect</h3>
             <p class="text-gray-400 mb-6">I am actively seeking research opportunities in ML/DL implemenation for the biomedical imaging, agriculture and microgrid optimization. Feel free to reach out!</p>
             
             <div class="flex justify-center space-x-6 text-3xl">
-                <!-- LinkedIn -->
                 <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
                 </a>
-                <!-- Email -->
                 <a href="mailto:roni.19eee132@gstu.edu.bd" class="text-gray-400 hover:text-primary-blue transition-colors">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                 </a>
@@ -388,7 +355,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript for dynamic functionality -->
     <script>
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
         
