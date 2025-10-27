@@ -63,17 +63,19 @@
 <body class="bg-secondary-gray font-sans text-gray-800">
 
     <header class="bg-white shadow-lg sticky top-0 z-20">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-primary-blue">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center">
+            
+            <h1 class="text-2xl font-extrabold text-primary-blue mx-auto">
                 Roni Khan
             </h1>
-            <nav id="main-nav" class="space-x-4 text-sm font-medium hidden sm:block">
+            
+            <nav id="main-nav" class="flex-grow flex justify-end space-x-4 text-sm font-medium">
                 <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
-                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
-                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Education</a>
-                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Research</a>
-                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Projects</a>
-                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Skills</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Projects</a>
+                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Skills</a>
             </nav>
         </div>
     </header>
@@ -87,7 +89,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="./20250918_145718.jpeg" alt="University Memory Image" class="w-full h-40 object-cover border-b border-gray-200">
+                    <img src="./20250918_133613.jpg" alt="University Memory Image" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Campus Life & Memories</p>
                         <p class="text-xs text-gray-500 mt-1">A photo with friends or classmates from a memorable university event.</p>
@@ -95,7 +97,7 @@
                 </div>
 
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <img src="./20250918_132243.jpeg" alt="Thesis signature" class="w-full h-40 object-cover border-b border-gray-200">
+                    <img src="./20250918_132243.jpg" alt="Thesis signature" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Thesis Signature</p>
                         <p class="text-xs text-gray-500 mt-1">A photo of me or my thesis supervisor.</p>
@@ -109,7 +111,7 @@
                         <p class="text-xs text-gray-500 mt-1">Photo from the competition or certificate ceremony.</p>
                     </div>
                 </div>
-
+                
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" alt="Deep Learning Segmentation Result Placeholder" class="w-full h-40 object-cover border-b border-gray-200">
                     <div class="p-4">
@@ -122,7 +124,7 @@
         </section>
 
         <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
-            <h3 class="section-header text-3xl font-bold text-gray-900">Professional Profile & Summary</h3>
+            <h3 class="section-header text-3xl font-bold text-gray-900">Professional Profile</h3>
             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
                 
                 <div class="flex-shrink-0 flex flex-col items-center">
@@ -250,22 +252,22 @@
             </div>
 
 
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis</h4>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis & On Going Work</h4>
             
             <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
                 <p class="text-lg font-semibold text-gray-800">FarmChat: An LLM RAG-powered Real-Time Tomato Leaf Disease Detection and Farmer Assistance in Bangla</p>
                 <p class="text-primary-blue font-medium text-sm">Status: Final year thesis work, yet to be submitted to a renowned journal.</p>
             </div>
-            <div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
                 <p class="text-lg font-semibold text-gray-800">On Going Work: EEG Signal Analysis Using Deep learning for the Alzheimer's Disease Classification.</p>
             </div>
-            <div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
                 <p class="text-lg font-semibold text-gray-800">On Going Work: Deep learning Approach for the BPDP power demand forecasting.</p>
             </div>
-            <div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
                 <p class="text-lg font-semibold text-gray-800">On Going Work: Breast cancer classification using microscopic images leveraging computer vision model.</p>
             </div>
-            <div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
                 <p class="text-lg font-semibold text-gray-800">On Going Work: EEG signal images classification using multimodal models.</p>
             </div>
 
@@ -360,8 +362,8 @@
     <script>
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
         
-        let activeSectionId = 'gallery';
-        
+        let activeSectionId = 'gallery'; 
+
         /**
          * Toggles section visibility and updates navigation highlighting.
          */
@@ -385,8 +387,6 @@
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('font-bold', 'text-primary-blue');
                 item.classList.add('text-gray-600');
-                // Use a slightly darker color for hover on unselected items
-                item.classList.remove('hover:text-accent-blue'); 
                 item.classList.add('hover:text-primary-blue');
 
                 if (item.getAttribute('data-section') === targetId) {
@@ -394,7 +394,7 @@
                     item.classList.remove('text-gray-600');
                 }
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
         }
         
         // Attach event listeners to navigation items on load
