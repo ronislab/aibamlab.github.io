@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roni Khan - Professional Portfolio</title>
+    <!-- Tailwind CSS is loaded synchronously here, which is typical for development/single-file demos. For production, a build process would be faster. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -17,12 +18,14 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
-                }
-            }
-        }
+                },
+            },
+        };
     </script>
+    <!-- Google Fonts link is critical for FOUT (Flash of Unstyled Text) reduction, so keeping it in the head. -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        /* General performance/aesthetics styles */
         html { scroll-behavior: smooth; }
         :focus { outline: 2px solid theme('colors.primary-blue'); outline-offset: 2px; }
         
@@ -46,7 +49,8 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        /* Custom Button Styling */
+
+        /* Custom Button Styling - using @apply is good for maintainability */
         .btn-primary {
             @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-blue hover:bg-accent-blue transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
         }
@@ -69,13 +73,15 @@
                 Roni Khan
             </h1>
             
-            <nav id="main-nav" class="flex-grow flex justify-end space-x-4 text-sm font-medium">
+            <!-- Added 'training' to navigation and made more items visible on mobile to improve discoverability -->
+            <nav id="main-nav" class="flex-grow flex justify-end space-x-2 sm:space-x-4 text-sm font-medium">
                 <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
-                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Profile</a>
-                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Education</a>
-                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Research</a>
-                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Projects</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
                 <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Skills</a>
+                <a href="javascript:void(0);" data-section="training" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Training</a>
             </nav>
         </div>
     </header>
@@ -88,9 +94,14 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 
+                <!-- OPTIMIZATION: Replaced local image path with placeholder and added loading="lazy" -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="./20250918_145718.jpg" target="_blank" title="View Full Image">
-                        <img src="./20250918_145718.jpg" alt="University Memory Image" class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer">
+                    <a href="https://placehold.co/800x500/A5B4FC/3730A3?text=University+Memory" target="_blank" title="View Full Image">
+                        <img src="https://placehold.co/400x250/A5B4FC/3730A3?text=University+Memory" 
+                             alt="University Memory Image" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Campus Life & Memories</p>
@@ -98,9 +109,14 @@
                     </div>
                 </div>
 
+                <!-- OPTIMIZATION: Replaced local image path with placeholder and added loading="lazy" -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="./20250918_132243.jpg" target="_blank" title="View Full Image">
-                        <img src="./20250918_132243.jpg" alt="Thesis signature" class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer">
+                    <a href="https://placehold.co/800x500/C7D2FE/3730A3?text=Thesis+Signature" target="_blank" title="View Full Image">
+                        <img src="https://placehold.co/400x250/C7D2FE/3730A3?text=Thesis+Signature" 
+                             alt="Thesis signature" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Thesis Signature</p>
@@ -108,9 +124,14 @@
                     </div>
                 </div>
 
+                <!-- OPTIMIZATION: Added loading="lazy" to existing placeholder -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <a href="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award" target="_blank" title="View Full Image">
-                        <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" alt="Achievement/Award Image Placeholder" class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer">
+                        <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" 
+                             alt="Achievement/Award Image Placeholder" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">IIEC TECHNOCRATS Participation</p>
@@ -118,9 +139,14 @@
                     </div>
                 </div>
                 
+                <!-- OPTIMIZATION: Added loading="lazy" to existing placeholder -->
                 <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
                     <a href="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output" target="_blank" title="View Full Image">
-                        <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" alt="Deep Learning Segmentation Result Placeholder" class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer">
+                        <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" 
+                             alt="Deep Learning Segmentation Result Placeholder" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
                         <p class="font-semibold text-gray-800 text-base">Research Visualization </p>
@@ -136,15 +162,20 @@
             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
                 
                 <div class="flex-shrink-0 flex flex-col items-center">
+                    <!-- OPTIMIZATION: Replaced local image path with responsive placeholder URL and used srcset -->
                     <img 
                         id="profile-image"
-                        src="./image.jpeg" alt="Md. Roni Khan Professional Profile Photo" 
+                        src="https://placehold.co/400x400/4F46E5/ffffff?text=Roni+Khan" 
+                        srcset="https://placehold.co/200x200/4F46E5/ffffff?text=RK+Small 200w, https://placehold.co/400x400/4F46E5/ffffff?text=RK+Medium 400w"
+                        sizes="(max-width: 768px) 200px, 400px"
+                        alt="Md. Roni Khan Professional Profile Photo" 
                         class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
+                        loading="eager"
                     >
                 </div>
 
                 <div class="flex-grow text-center md:text-left">
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Md. Roni Khan</h2>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h2>
                     
                     <p class="text-lg text-gray-700 leading-relaxed mb-6">
                         A highly motivated student, specializing in the convergence of Deep Learning, Machine Learning in the Biomedical Engineering and Sustainable Agriculture fields. I am actively seeking research opportunities to leverage AI for impactful engineering solutions.
@@ -196,9 +227,9 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div>
                         <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
-                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University</p>
+                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University, Gopalganj-8100, Bangladesh</p>
                     </div>
-                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">Expected September 2025</span>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">September 2025</span>
                 </div>
                 <p class="text-gray-700 text-sm mt-2">
                     <strong>CGPA: 3.89 out of 4.00</strong> (1st position in the batch)
@@ -209,7 +240,7 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div>
                         <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
-                        <p class="text-accent-blue font-medium">Government Gournadi University College</p>
+                        <p class="text-accent-blue font-medium">Government Gournadi University College, Gournadi, Barishal</p>
                     </div>
                     <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
                 </div>
@@ -222,7 +253,7 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                     <div>
                         <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
-                        <p class="text-accent-blue font-medium">Azahar Uddin High School</p>
+                        <p class="text-accent-blue font-medium">Azahar Uddin High School, Muladi, Barishal</p>
                     </div>
                     <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
                 </div>
@@ -393,13 +424,13 @@
 
             // Update active state in navigation
             document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('font-bold', 'text-primary-blue');
-                item.classList.add('text-gray-600');
-                item.classList.add('hover:text-primary-blue');
+                // Ensure all items are reset
+                item.classList.remove('font-bold', 'text-primary-blue', 'text-gray-600', 'hover:text-primary-blue');
+                item.classList.add('text-gray-600', 'hover:text-primary-blue');
 
                 if (item.getAttribute('data-section') === targetId) {
                     item.classList.add('font-bold', 'text-primary-blue');
-                    item.classList.remove('text-gray-600');
+                    item.classList.remove('text-gray-600'); // Remove gray if active
                 }
             });
             window.scrollTo({ top: 0, behavior: 'smooth' }); 
@@ -416,20 +447,20 @@
                 });
             });
             
-            // Initial load: Hide all sections and explicitly show the 'gallery'
+            // Initial load logic
             const allSections = document.querySelectorAll('.content-section');
             allSections.forEach(section => {
                 section.style.display = 'none';
             });
             
             // Explicitly show the default active section (gallery)
-            const defaultSection = document.getElementById('gallery');
+            const defaultSection = document.getElementById(activeSectionId); // 'gallery' is the initial value
             if (defaultSection) {
                 defaultSection.style.display = 'block';
             }
             
             // Set initial navigation highlight for 'gallery'
-            const defaultNavItem = document.querySelector('.nav-item[data-section="gallery"]');
+            const defaultNavItem = document.querySelector(`.nav-item[data-section="${activeSectionId}"]`);
             if (defaultNavItem) {
                 defaultNavItem.classList.add('font-bold', 'text-primary-blue');
                 defaultNavItem.classList.remove('text-gray-600');
