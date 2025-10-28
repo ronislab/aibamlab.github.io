@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roni Khan - Professional Portfolio</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary-blue': '#4F46E5',
-                        'accent-blue': '#3730A3',
+                        'primary-blue': '#4F46E5', // Indigo 600
+                        'accent-blue': '#3730A3',  // Indigo 800 for darker accents
                         'secondary-gray': '#F9FAFB',
                     },
                     fontFamily: {
@@ -22,15 +21,15 @@
             },
         };
     </script>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <style>
-        :focus { outline: 2px solid theme('colors.primary-blue'); outline-offset: 3px; }
-
+        /* General performance/aesthetics styles */
+        html { scroll-behavior: smooth; }
+        :focus { outline: 2px solid theme('colors.primary-blue'); outline-offset: 2px; }
+        
         .section-header {
             position: relative;
-            padding-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
         .section-header::after {
@@ -38,171 +37,410 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 70px;
-            height: 4px;
+            width: 60px;
+            height: 5px;
             background-color: theme('colors.primary-blue');
             border-radius: 2px;
         }
-
-        .card-shadow-hover {
+        
+        .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card-shadow-hover:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1), 0 5px 15px -5px rgba(0,0,0,0.05);
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
+        /* Custom Button Styling - using @apply is good for maintainability */
         .btn-primary {
-            @apply inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-blue hover:bg-accent-blue transition duration-300 transform hover:scale-[1.03] focus:ring-4 focus:ring-primary-blue/50;
+            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-blue hover:bg-accent-blue transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
         }
         .btn-secondary {
-            @apply inline-flex items-center justify-center px-5 py-2.5 border border-primary-blue text-base font-medium rounded-full shadow-md text-primary-blue bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-[1.03] focus:ring-4 focus:ring-primary-blue/50;
+            @apply inline-flex items-center justify-center px-4 py-2 border border-primary-blue text-base font-medium rounded-full shadow-md text-primary-blue bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
         }
-
-        .content-section { display: none; }
-
-        .skill-tag {
-            @apply inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md transition duration-200 hover:bg-accent-blue hover:scale-105;
+        
+        /* Content sections are hidden by default, visibility is managed by JavaScript on navigation clicks */
+        .content-section {
+            display: none;
         }
-
-        img:hover { transform: scale(1.03); transition: transform 0.3s ease; }
     </style>
 </head>
-<body class="bg-secondary-gray font-sans text-gray-800 transition-colors duration-500">
+<body class="bg-secondary-gray font-sans text-gray-800">
 
-    <!-- Header -->
-    <header class="bg-white shadow-xl sticky top-0 z-20 transition-colors duration-500">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 class="text-2xl font-extrabold text-primary-blue">Roni Khan</h1>
-            <nav id="main-nav" class="flex space-x-2 sm:space-x-4 text-sm font-medium">
-                <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue font-bold">Gallery</a>
-                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue">Profile</a>
-                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue hidden sm:inline">Research</a>
-                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue hidden md:inline">Skills</a>
-                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue hidden lg:inline">Projects</a>
-                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue hidden lg:inline">Education</a>
+    <header class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center">
+            
+            <h1 class="text-2xl font-extrabold text-primary-blue mx-auto">
+                Roni Khan
+            </h1>
+            
+            <nav id="main-nav" class="flex-grow flex justify-end space-x-2 sm:space-x-4 text-sm font-medium">
+                <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
+                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Skills</a>
+                <a href="javascript:void(0);" data-section="training" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Training</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
 
-        <!-- Gallery -->
-        <section id="gallery" class="content-section bg-white p-8 rounded-xl shadow-xl mb-12 card-shadow-hover">
-            <h2 class="section-header text-3xl font-bold text-gray-900">Visual Timeline</h2>
+        <section id="gallery" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline</h3>
             <p class="text-gray-600 mb-8">This gallery showcases a mix of my technical project results, academic achievements, university memories, and personal work time.</p>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 card-shadow-hover">
-                    <a href="./friend's.jpg" target="_blank">
-                        <img src="./friend's.jpg" alt="University Memory Image with friends" class="w-full h-36 sm:h-48 object-cover border-b border-gray-200 cursor-pointer" loading="lazy">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <a href="./friend's.jpg" target="_blank" title="View Full Image">
+                        <img src="./friend's.jpg" 
+                             alt="University Memory Image" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 text-base">Campus Life & Memories</h3>
+                        <p class="font-semibold text-gray-800 text-base">Campus Life & Memories</p>
                         <p class="text-xs text-gray-500 mt-1">A photo with friends or classmates from a memorable university event.</p>
                     </div>
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 card-shadow-hover">
-                    <a href="./thesis.jpg" target="_blank">
-                        <img src="./thesis.jpg" alt="Thesis signature and completion" class="w-full h-36 sm:h-48 object-cover border-b border-gray-200 cursor-pointer" loading="lazy">
+
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <a href="./thesis.jpg" target="_blank" title="View Full Image">
+                        <img src="./thesis.jpg" 
+                             alt="Thesis signature" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 text-base">Thesis Signature</h3>
+                        <p class="font-semibold text-gray-800 text-base">Thesis Signature</p>
                         <p class="text-xs text-gray-500 mt-1">A photo of me or my thesis supervisor.</p>
                     </div>
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 card-shadow-hover">
-                    <a href="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award" target="_blank">
-                        <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" alt="Achievement/Award Image Placeholder" class="w-full h-36 sm:h-48 object-cover border-b border-gray-200 cursor-pointer" loading="lazy">
+
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <a href="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award" target="_blank" title="View Full Image">
+                        <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" 
+                             alt="Achievement/Award Image Placeholder" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 text-base">IIEC TECHNOCRATS Participation</h3>
+                        <p class="font-semibold text-gray-800 text-base">IIEC TECHNOCRATS Participation</p>
                         <p class="text-xs text-gray-500 mt-1">Photo from the competition or certificate ceremony.</p>
                     </div>
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 card-shadow-hover">
-                    <a href="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output" target="_blank">
-                        <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" alt="Deep Learning Segmentation Result Placeholder" class="w-full h-36 sm:h-48 object-cover border-b border-gray-200 cursor-pointer" loading="lazy">
+                
+                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <a href="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output" target="_blank" title="View Full Image">
+                        <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" 
+                             alt="Deep Learning Segmentation Result Placeholder" 
+                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                             loading="lazy"
+                        >
                     </a>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-800 text-base">Research Visualization</h3>
-                        <p class="text-xs text-gray-500 mt-1">A key result visualization from a published paper.</p>
+                        <p class="font-semibold text-gray-800 text-base">Research Visualization </p>
+                        <p class="text-xs text-gray-500 mt-1">A key result visualization from a published paper (e.g., tumor segmentation).</p>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Profile -->
-        <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue card-shadow-hover">
-            <h2 class="section-header text-3xl font-bold text-gray-900">Professional Profile</h2>
+        <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
+            <h3 class="section-header text-3xl font-bold text-gray-900">Professional Profile</h3>
             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
+                
                 <div class="flex-shrink-0 flex flex-col items-center">
-                    <img id="profile-image" src="./image.jpeg" alt="Roni Khan Professional Profile Photo" class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl" loading="eager">
+                    <img 
+                        id="profile-image"
+                        src="./image.jpeg" 
+                        alt="Roni Khan Professional Profile Photo" 
+                        class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
+                        loading="eager"
+                    >
                 </div>
+
                 <div class="flex-grow text-center md:text-left">
-                    <h3 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h3>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h2>
+                    
                     <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        A highly motivated student, specializing in the convergence of <strong>Deep Learning</strong> and <strong>Machine Learning</strong> in <strong>Biomedical Engineering</strong> and <strong>Sustainable Agriculture</strong>. Actively seeking research opportunities to leverage AI for impactful solutions.
+                        A highly motivated student, specializing in the convergence of **Deep Learning**, **Machine Learning** in the **Biomedical Engineering** and **Sustainable Agriculture** fields. I am actively seeking research opportunities to leverage AI for impactful engineering solutions.
                     </p>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
-                        <a href="CV - Copy.docx" download class="btn-primary">Download CV</a>
-                        <a href="mailto:roni.19eee132@gstu.edu.bd" class="btn-secondary">Email</a>
-                        <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="btn-secondary">LinkedIn</a>
+
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium mt-4">
+                        
+                        <a href="CV - Copy.docx" download class="btn-primary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Download CV
+                        </a>
+
+                        <a href="mailto:roni.19eee132@gstu.edu.bd" class="btn-secondary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 12H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2z"></path></svg>
+                            Email
+                        </a>
+                        <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="btn-secondary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
+                            LinkedIn
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education, Research, Projects, Skills, Training ... -->
-        <!-- Keep your existing sections unchanged but apply class="card-shadow-hover" where missing -->
+
+        <section id="training" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Core Research Interests & Languages</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                My work focuses on applying advanced computational techniques to solve pressing challenges in engineering and life sciences, specifically:
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Biomedical Engineering</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Sustainable Agriculture</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Microgrid Optimization</span>
+            </div>
+
+            <h4 class="text-xl font-bold mt-8 mb-2 text-gray-700">Language Proficiency</h4>
+            <ul class="list-disc ml-5 text-gray-700 space-y-1">
+                <li>**Bangla:** Native Speaker</li>
+                <li>**English:** Fluent (Reading, Writing, Listening, Speaking)</li>
+            </ul>
+        </section>
+
+
+        <section id="education" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Education</h3>
+            
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
+                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University, Gopalganj-8100, Bangladesh</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">September 2025</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    **CGPA: 3.89 out of 4.00** (1st position in the batch)
+                </p>
+            </div>
+
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
+                        <p class="text-accent-blue font-medium">Government Gournadi University College, Gournadi, Barishal</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    **GPA: 4.08 out of 5.00**
+                </p>
+            </div>
+
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
+                        <p class="text-accent-blue font-medium">Azahar Uddin High School, Muladi, Barishal</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    **GPA: 3.94 out of 5.00**
+                </p>
+            </div>
+            
+        </section>
+
+        <section id="research" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Research & Publications</h3>
+
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">1. Published & Accepted</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-primary-blue/50 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">Deep Learning-Driven Brain Tumor Sectionalisation: Leveraging Deep Learning for MRI Analysis</p>
+                <p class="text-primary-blue font-medium text-sm">Role: First Author</p>
+                <p class="text-gray-500 text-sm mt-1">
+                    DOI: <a href="https://doi.org/10.1109/QPAIN66474.2025.11172256" target="_blank" class="text-indigo-600 hover:text-accent-blue underline">10.1109/QPAIN66474.2025.11172256</a>
+                </p>
+            </div>
+
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">YOLO11 for High Accuracy Real-Time Detection and Classification of Diverse E-Waste Categories: Enhancing Recycling Efficiency</p>
+                <p class="text-primary-blue font-medium text-sm">Status: Accepted to the Engineering Reports journal | Role: Co-Author</p>
+            </div>
+
+
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">2. Under Review</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">Cervical Cancer Detection Using Pap Smear Images with Deep Learning</p>
+                <p class="text-primary-blue font-medium text-sm">Journal: Journal of Medical Systems | Role: First Author</p>
+            </div>
+
+
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis & On Going Work</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">FarmChat: An LLM RAG-powered Real-Time Tomato Leaf Disease Detection and Farmer Assistance in Bangla</p>
+                <p class="text-primary-blue font-medium text-sm">Status: Final year thesis work, yet to be submitted to a renowned journal.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG Signal Analysis Using Deep learning for the Alzheimer's Disease Classification.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: Deep learning Approach for the BPDP power demand forecasting.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: Breast cancer classification using microscopic images leveraging computer vision model.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG signal images classification using multimodal models.</p>
+            </div>
+
+        </section>
+        
+        <section id="projects" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Undergraduate Projects</h3>
+            
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-xl font-bold">IoT-based automatic car accident detection and sending a rescue message</h4>
+                <p class="text-primary-blue font-medium text-sm">Course Project</p>
+                <p class="text-gray-700 text-sm mt-2">Developed an automated system utilizing IoT sensors to instantly detect car accidents and transmit rescue messages with location data, improving emergency response times.</p>
+            </div>
+
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-xl font-bold">Portable wind turbine generator for mobile and low-wattage charging device</h4>
+                <p class="text-primary-blue font-medium text-sm">Competitive Project</p>
+                <p class="text-gray-700 text-sm mt-2">Designed and constructed a compact, portable wind turbine generator optimized for charging mobile phones and other low-wattage devices in off-grid locations.</p>
+            </div>
+        </section>
+        
+        <section id="skills" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Technical Skills</h3>
+            
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Machine Learning & Deep Learning (Core Expertise)</h4>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">PyTorch</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">TensorFlow</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Scikit-learn</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">LLM / LangChain</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">YOLOv5–v11</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">OpenCV / DETR / Detectron2</span>
+            </div>
+
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Programming & Soft Tools</h4>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Python</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">MATLAB</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">C/C++</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">VS Code / PyCharm / Colab</span>
+            </div>
+
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Simulation & Engineering Tools</h4>
+            <div class="flex flex-wrap gap-3">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Proteus</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">AutoCAD</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Microsoft Office Suite</span>
+            </div>
+
+        </section>
+
+        <section id="training-activities" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Training & Activities</h3>
+            
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Training</h4>
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-lg font-bold">Industrial Training</h4>
+                <p class="text-primary-blue font-medium text-sm">Training Institute for Chemical Industries (TICI), Narsingdi, Bangladesh</p>
+                <span class="text-sm text-gray-500 font-light">January 18 – 30, 2025</span>
+            </div>
+
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Extra Co-curricular Activities</h4>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700 text-base">
+                <li>**Competition:** Participated two times in **IIEC TECHNOCRATS (V.1 and V.2)**.</li>
+                <li>**IoT Training:** Completed 1-3 segments of the Robotics course from Roboment Bangladesh (Online).</li>
+                <li>**Workshop:** Attended the Leadership and Communicative Skills Development Training by Inspiration for Human Welfare.</li>
+            </ul>
+        </section>
 
     </main>
 
-    <footer id="contact" class="bg-gray-800 text-white py-8 mt-8 transition-colors duration-500">
+    <footer id="contact" class="bg-gray-800 text-white py-8 mt-8">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-2xl font-bold mb-3">Let's Connect</h2>
-            <p class="text-gray-400 mb-6">I am actively seeking research opportunities in ML/DL for biomedical imaging, agriculture, and microgrid optimization. Feel free to reach out!</p>
+            <h3 class="text-2xl font-bold mb-3">Let's Connect</h3>
+            <p class="text-gray-400 mb-6">I am actively seeking research opportunities in ML/DL implemenation for the biomedical imaging, agriculture and microgrid optimization. Feel free to reach out!</p>
+            
             <div class="flex justify-center space-x-6 text-3xl">
-                <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors" aria-label="LinkedIn Profile">
-                    <!-- SVG -->
+                <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
                 </a>
-                <a href="mailto:roni.19eee132@gstu.edu.bd" class="text-gray-400 hover:text-primary-blue transition-colors" aria-label="Email Address">
-                    <!-- SVG -->
+                <a href="mailto:roni.19eee132@gstu.edu.bd" class="text-gray-400 hover:text-primary-blue transition-colors">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                 </a>
             </div>
-            <p class="text-xs text-gray-500 mt-6">&copy; <span id="current-year-footer"></span> Roni Khan. All rights reserved.</p>
+
+            <p class="text-xs text-gray-500 mt-6">
+                &copy; <span id="current-year-footer"></span> Roni Khan. All rights reserved.
+            </p>
         </div>
     </footer>
 
     <script>
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+        
+        let activeSectionId = 'gallery'; 
 
-        const navItems = document.querySelectorAll('.nav-item');
-        const sections = document.querySelectorAll('.content-section');
-        let activeSectionId = 'gallery';
-
+        /**
+         * Toggles section visibility and updates navigation highlighting.
+         */
         function navigateToSection(targetId) {
-            sections.forEach(section => section.style.display = 'none');
-            const newSection = document.getElementById(targetId);
-            if(newSection) newSection.style.display = 'block';
-
-            navItems.forEach(item => {
-                item.classList.remove('font-bold', 'text-primary-blue');
-                item.classList.add('text-gray-600');
-                if(item.getAttribute('data-section') === targetId){
-                    item.classList.add('font-bold', 'text-primary-blue');
-                    item.classList.remove('text-gray-600');
-                }
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
             });
 
-            window.scrollTo({ top: document.querySelector('main').offsetTop, behavior: 'smooth' });
-        }
+            // Show the new target section
+            const newSection = document.getElementById(targetId);
+            if (newSection) {
+                newSection.style.display = 'block';
+                activeSectionId = targetId;
+            }
 
+            // Update active state in navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                // Reset styling
+                item.classList.remove('font-bold', 'text-primary-blue');
+                item.classList.add('text-gray-600');
+
+                if (item.getAttribute('data-section') === targetId) {
+                    item.classList.add('font-bold', 'text-primary-blue');
+                    item.classList.remove('text-gray-600'); // Remove gray if active
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
+        
+        // Attach event listeners to navigation items on load
         document.addEventListener('DOMContentLoaded', () => {
-            navItems.forEach(item => item.addEventListener('click', e => {
-                e.preventDefault();
-                navigateToSection(item.getAttribute('data-section'));
-            }));
-            navigateToSection(activeSectionId);
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = item.getAttribute('data-section');
+                    // Check if the target is 'training' and use the new ID
+                    navigateToSection(targetId === 'training' ? 'training' : targetId);
+                });
+            });
+            
+            // Initial load using the main navigation function
+            navigateToSection(activeSectionId); 
         });
     </script>
 </body>
