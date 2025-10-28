@@ -1,642 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roni Khan - Professional Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#4F46E5', // Indigo 600
-                        'accent-blue': '#3730A3',  // Indigo 800 for darker accents
-                        'secondary-gray': '#F9FAFB',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        };
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* General performance/aesthetics styles */
-        html { scroll-behavior: smooth; }
-        :focus { outline: 2px solid theme('colors.primary-blue'); outline-offset: 2px; }
-        
-        .section-header {
-            position: relative;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .section-header::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 60px;
-            height: 5px;
-            background-color: theme('colors.primary-blue');
-            border-radius: 2px;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roni Khan - Professional Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4F46E5', // Indigo 600
+                        'accent-blue': '#3730A3',  // Indigo 800 for darker accents
+                        'secondary-gray': '#F9FAFB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* General performance/aesthetics styles */
+        html { scroll-behavior: smooth; }
+        :focus { outline: 2px solid theme('colors.primary-blue'); outline-offset: 2px; }
+        
+        .section-header {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 5px;
+            background-color: theme('colors.primary-blue');
+            border-radius: 2px;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
 
-        /* Custom Button Styling - using @apply is good for maintainability */
-        .btn-primary {
-            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-blue hover:bg-accent-blue transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
-        }
-        .btn-secondary {
-            @apply inline-flex items-center justify-center px-4 py-2 border border-primary-blue text-base font-medium rounded-full shadow-md text-primary-blue bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
-        }
-        
-        /* Content sections are hidden by default, visibility is managed by JavaScript on navigation clicks */
-        .content-section {
-            display: none;
-        }
+        /* Custom Button Styling - using @apply is good for maintainability */
+        .btn-primary {
+            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-primary-blue hover:bg-accent-blue transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
+        }
+        .btn-secondary {
+            @apply inline-flex items-center justify-center px-4 py-2 border border-primary-blue text-base font-medium rounded-full shadow-md text-primary-blue bg-white hover:bg-indigo-50 transition duration-300 transform hover:scale-[1.02] focus:ring-4 focus:ring-primary-blue/50;
+        }
+        
+        /* Content sections are hidden by default, visibility is managed by JavaScript on navigation clicks */
+        .content-section {
+            display: none;
+        }
 
-        /* --- New/Modified CSS for Gallery & Modal (Lightbox) --- */
-        .gallery-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.75rem; /* rounded-xl */
-        }
-        .gallery-slide {
-            min-width: 100%;
-            transition: transform 0.8s ease-in-out; /* Slide speed */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        /* Modal (Lightbox) Styles */
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeIn 0.3s;
-        }
+        /* --- UPDATED CSS for Gallery & Modal (Lightbox) --- */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .gallery-slide {
+            min-width: 100%;
+            transition: transform 0.8s ease-in-out; /* Slide speed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Modal (Lightbox) Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95); /* Slightly darker background */
+            animation: fadeIn 0.3s;
+            /* Flex layout to center content and position caption */
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-        #lightbox-content {
-            margin: auto;
-            display: block;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90%;
-            object-fit: contain;
-            transition: transform 0.3s ease-out;
-        }
+        #lightbox-content-container {
+            /* This new container helps manage the layout of the image and caption */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 95%; /* Use almost full width on all screens */
+            max-width: 900px; /* Max size for large screens */
+            max-height: 90vh; /* Use 90% of viewport height */
+        }
+        
+        #lightbox-image {
+            display: block;
+            width: 100%; 
+            max-width: 100%;
+            max-height: 80vh; /* Max height to leave space for the caption */
+            object-fit: contain; /* Ensures the image is fully visible without cropping */
+        }
 
-        .lightbox-close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+        #lightbox-caption {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+            color: #f1f1f1;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            background: rgba(0,0,0,0.3); /* Subtle background for readability */
+        }
 
-        .lightbox-close:hover,
-        .lightbox-close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-        @keyframes fadeIn {
-            from {opacity: 0}
-            to {opacity: 1}
-        }
-        /* --- End Gallery CSS --- */
-    </style>
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        /* --- End Gallery CSS --- */
+    </style>
 </head>
 <body class="bg-secondary-gray font-sans text-gray-800">
 
-    <header class="bg-white shadow-lg sticky top-0 z-20">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between">
-            
-            <h1 class="text-2xl font-extrabold text-primary-blue mb-2 sm:mb-0">
-                Roni Khan
-            </h1>
-            
-            <nav id="main-nav" class="w-full sm:w-auto flex justify-center sm:justify-end space-x-3 text-sm font-medium overflow-x-auto py-1">
-                <a href="javascript:void(0);" data-section="gallery" class="nav-item whitespace-nowrap px-2 text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
-                <a href="javascript:void(0);" data-section="profile" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
-                <a href="javascript:void(0);" data-section="education" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Education</a>
-                <a href="javascript:void(0);" data-section="research" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Research</a>
-                <a href="javascript:void(0);" data-section="projects" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
-                <a href="javascript:void(0);" data-section="skills" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Skills</a>
-                <a href="javascript:void(0);" data-section="training" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Training</a>
-            </nav>
-        </div>
-    </header>
+    <header class="bg-white shadow-lg sticky top-0 z-20">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between">
+            
+            <h1 class="text-2xl font-extrabold text-primary-blue mb-2 sm:mb-0">
+                Roni Khan
+            </h1>
+            
+            <nav id="main-nav" class="w-full sm:w-auto flex justify-center sm:justify-end space-x-3 text-sm font-medium overflow-x-auto py-1">
+                <a href="javascript:void(0);" data-section="gallery" class="nav-item whitespace-nowrap px-2 text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
+                <a href="javascript:void(0);" data-section="skills" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Skills</a>
+                <a href="javascript:void(0);" data-section="training" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Training</a>
+            </nav>
+        </div>
+    </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
+    <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
 
-        <section id="gallery" class="content-section bg-white p-6 md:p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline</h3>
-            <p class="text-gray-600 mb-6">A rotating selection showcasing my academic journey, project milestones, and important achievements over time. Click any image to view it full screen.</p>
-            
-            <div class="gallery-container w-full h-[400px] shadow-2xl relative">
-                <div id="gallery-carousel" class="flex h-full" style="width: 400%;">
-                    
-                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
-                        <img src="./friend's.jpg"  
-                             alt="University Memory Image"  
-                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
-                             onclick="openLightbox('./friend's.jpg', 'Campus Life & Memories')"
-                             loading="eager"
-                        >
-                        <div class="p-4 w-full text-center">
-                            <p class="font-semibold text-gray-800 text-lg">Campus Life & Memories</p>
-                            <p class="text-sm text-gray-500 mt-1">A memorable photo with friends from a university event.</p>
-                        </div>
-                    </div>
+        <section id="gallery" class="content-section bg-white p-6 md:p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline</h3>
+            <p class="text-gray-600 mb-6">A rotating selection showcasing my academic journey, project milestones, and important achievements over time. Click any image to view it full screen.</p>
+            
+            <div class="gallery-container w-full h-[400px] shadow-2xl relative">
+                <div id="gallery-carousel" class="flex h-full" style="width: 400%;">
+                    
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                                                <img src="https://placehold.co/800x500/374151/ffffff?text=Academic+Milestone"  
+                             alt="University Memory Image"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('https://placehold.co/800x500/374151/ffffff?text=Academic+Milestone', 'A photo of me in a suit, representing an academic milestone.')"
+                             loading="eager"
+                        >
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Academic Milestone</p>
+                            <p class="text-sm text-gray-500 mt-1">A memorable photo with friends from a university event.</p>
+                        </div>
+                    </div>
 
-                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
-                        <img src="./thesis.jpg"  
-                             alt="Thesis signature"  
-                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
-                             onclick="openLightbox('./thesis.jpg', 'Thesis Submission Moment')"
-                             loading="lazy"
-                        >
-                        <div class="p-4 w-full text-center">
-                            <p class="font-semibold text-gray-800 text-lg">Thesis Submission Moment</p>
-                            <p class="text-sm text-gray-500 mt-1">A photo related to my final year thesis work and supervisor.</p>
-                        </div>
-                    </div>
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="./thesis.jpg"  
+                             alt="Thesis signature"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('./thesis.jpg', 'Thesis Submission Moment')"
+                             loading="lazy"
+                        >
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Thesis Submission Moment</p>
+                            <p class="text-sm text-gray-500 mt-1">A photo related to my final year thesis work and supervisor.</p>
+                        </div>
+                    </div>
 
-                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
-                        <img src="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award"  
-                             alt="Achievement/Award Image Placeholder"  
-                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
-                             onclick="openLightbox('https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award', 'IIEC TECHNOCRATS Participation Award')"
-                             loading="lazy"
-                        >
-                        <div class="p-4 w-full text-center">
-                            <p class="font-semibold text-gray-800 text-lg">IIEC TECHNOCRATS Participation</p>
-                            <p class="text-sm text-gray-500 mt-1">Certificate or image from the competition ceremony.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
-                        <img src="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output"  
-                             alt="Deep Learning Segmentation Result Placeholder"  
-                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
-                             onclick="openLightbox('https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output', 'Research Visualization: Deep Learning Output')"
-                             loading="lazy"
-                        >
-                        <div class="p-4 w-full text-center">
-                            <p class="font-semibold text-gray-800 text-lg">Research Visualization</p>
-                            <p class="text-sm text-gray-500 mt-1">A key result visualization from a published paper.</p>
-                        </div>
-                    </div>
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award"  
+                             alt="Achievement/Award Image Placeholder"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award', 'IIEC TECHNOCRATS Participation Award')"
+                             loading="lazy"
+                        >
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">IIEC TECHNOCRATS Participation</p>
+                            <p class="text-sm text-gray-500 mt-1">Certificate or image from the competition ceremony.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output"  
+                             alt="Deep Learning Segmentation Result Placeholder"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output', 'Research Visualization: Deep Learning Output')"
+                             loading="lazy"
+                        >
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Research Visualization</p>
+                            <p class="text-sm text-gray-500 mt-1">A key result visualization from a published paper.</p>
+                        </div>
+                    </div>
 
-                </div>
-                <div id="gallery-dots" class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
-                    </div>
-            </div>
-        </section>
+                </div>
+                <div id="gallery-dots" class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+                    </div>
+            </div>
+        </section>
 
-        <div id="lightbox">
-            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-content">
-            <div id="lightbox-caption" class="text-white text-center p-4 mt-5 text-lg"></div>
-        </div>
+                <div id="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <div id="lightbox-content-container">
+                <img id="lightbox-image" alt="Full screen gallery image">
+                <div id="lightbox-caption"></div>
+            </div>
+        </div>
+                <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
+            <h3 class="section-header text-3xl font-bold text-gray-900">Professional Focus</h3>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
+                
+                <div class="flex-shrink-0 flex flex-col items-center">
+                    <img 
+                        id="profile-image"
+                        src="./image.jpeg" 
+                        alt="Roni Khan Professional Profile Photo" 
+                        class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
+                        loading="eager"
+                    >
+                </div>
 
-        <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
-            <h3 class="section-header text-3xl font-bold text-gray-900">My Story & Professional Focus</h3>
-            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
-                
-                <div class="flex-shrink-0 flex flex-col items-center">
-                    <img 
-                        id="profile-image"
-                        src="./image.jpeg" 
-                        alt="Roni Khan Professional Profile Photo" 
-                        class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover ring-4 ring-primary-blue/30 shadow-xl"
-                        loading="eager"
-                    >
-                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h2>
+                    
+                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        I am a highly dedicated individual, passionate about harnessing the power of Deep Learning and Machine Learning. My research lies at the intersection of Biomedical Engineering and Sustainable Agriculture, where I seek to create real-world, impactful solutions. I'm driven by the desire to build innovative AI systems and am currently seeking <strong>research opportunities</strong> to apply my computational skills to complex engineering problems.
+                    </p>
 
-                <div class="flex-grow text-center md:text-left">
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h2>
-                    
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        I am a highly dedicated individual, passionate about harnessing the power of Deep Learning and Machine Learning. My research lies at the intersection of Biomedical Engineering and Sustainable Agriculture, where I seek to create real-world, impactful solutions. I'm driven by the desire to build innovative AI systems and am currently seeking <strong>research opportunities</strong> to apply my computational skills to complex engineering problems.
-                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium mt-4">
+                        
+                        <a href="CV - Copy.docx" download class="btn-primary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Download CV
+                        </a>
 
-                    <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium mt-4">
-                        
-                        <a href="CV - Copy.docx" download class="btn-primary flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Download CV
-                        </a>
+                        <a href="mailto:roni.19eee132@gstu.edu.bd" class="btn-secondary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 12H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2z"></path></svg>
+                            Email
+                        </a>
+                        <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="btn-secondary flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <a href="mailto:roni.19eee132@gstu.edu.bd" class="btn-secondary flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 12H4a2 2 0 01-2-2V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2z"></path></svg>
-                            Email
-                        </a>
-                        <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="btn-secondary flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="interests" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Core Research Interests</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+                My passion is solving real-world engineering and life science problems using advanced computation. My current focus areas are:
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Biomedical Imaging & Deep Learning</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">AI for Sustainable Agriculture</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Microgrid Energy Optimization</span>
+            </div>
 
-        <section id="interests" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Core Research Interests</h3>
-            <p class="text-gray-700 leading-relaxed mb-4">
-                My passion is solving real-world engineering and life science problems using advanced computation. My current focus areas are:
-            </p>
-            <div class="flex flex-wrap gap-3">
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Biomedical Imaging & Deep Learning</span>
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">AI for Sustainable Agriculture</span>
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Microgrid Energy Optimization</span>
-            </div>
+            <h4 class="text-xl font-bold mt-8 mb-2 text-gray-700">Language Proficiency</h4>
+            <ul class="list-disc ml-5 text-gray-700 space-y-1">
+                <li><strong>Bangla:</strong>Native Speaker</li>
+                <li><strong>English:</strong> Fully Fluent (Professional and Academic Contexts)</li>
+            </ul>
+        </section>
 
-            <h4 class="text-xl font-bold mt-8 mb-2 text-gray-700">Language Proficiency</h4>
-            <ul class="list-disc ml-5 text-gray-700 space-y-1">
-                <li><strong>Bangla:</strong>Native Speaker</li>
-                <li><strong>English:</strong> Fully Fluent (Professional and Academic Contexts)</li>
-            </ul>
-        </section>
+        <section id="education" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Education</h3>
+            
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
+                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University, Gopalganj-8100, Bangladesh</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">September 2025</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    CGPA: 3.89 out of 4.00 (1st position in the batch)
+                </p>
+            </div>
 
-        <section id="education" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Education</h3>
-            
-            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800">B.Sc. Engineering in Electrical and Electronic Engineering</h4>
-                        <p class="text-accent-blue font-medium">Gopalganj Science and Technology University, Gopalganj-8100, Bangladesh</p>
-                    </div>
-                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">September 2025</span>
-                </div>
-                <p class="text-gray-700 text-sm mt-2">
-                    CGPA: 3.89 out of 4.00 (1st position in the batch)
-                </p>
-            </div>
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
+                        <p class="text-accent-blue font-medium">Government Gournadi University College, Gournadi, Barishal</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    GPA: 4.08 out of 5.00
+                </p>
+            </div>
 
-            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800">Higher Secondary Certificate</h4>
-                        <p class="text-accent-blue font-medium">Government Gournadi University College, Gournadi, Barishal</p>
-                    </div>
-                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
-                </div>
-                <p class="text-gray-700 text-sm mt-2">
-                    GPA: 4.08 out of 5.00
-                </p>
-            </div>
+            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
+                        <p class="text-accent-blue font-medium">Azahar Uddin High School, Muladi, Barishal</p>
+                    </div>
+                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-2">
+                    GPA: 3.94 out of 5.00
+                </p>
+            </div>
+            
+        </section>
 
-            <div class="mb-4 p-4 border-l-4 border-primary-blue/50 bg-secondary-gray rounded-lg transition hover:border-primary-blue duration-300">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800">Secondary School Certificate</h4>
-                        <p class="text-accent-blue font-medium">Azahar Uddin High School, Muladi, Barishal</p>
-                    </div>
-                    <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
-                </div>
-                <p class="text-gray-700 text-sm mt-2">
-                    GPA: 3.94 out of 5.00
-                </p>
-            </div>
-            
-        </section>
+        <section id="research" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Research & Publications</h3>
 
-        <section id="research" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Research & Publications</h3>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">1. Published & Accepted</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-primary-blue/50 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">Deep Learning-Driven Brain Tumor Sectionalisation: Leveraging Deep Learning for MRI Analysis</p>
+                <p class="text-primary-blue font-medium text-sm">Role: First Author</p>
+                <p class="text-gray-500 text-sm mt-1">
+                    DOI: <a href="https://doi.org/10.1109/QPAIN66474.2025.11172256" target="_blank" class="text-indigo-600 hover:text-accent-blue underline">10.1109/QPAIN66474.2025.11172256</a>
+                </p>
+            </div>
 
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">1. Published & Accepted</h4>
-            
-            <div class="mb-5 p-4 border-l-4 border-primary-blue/50 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">Deep Learning-Driven Brain Tumor Sectionalisation: Leveraging Deep Learning for MRI Analysis</p>
-                <p class="text-primary-blue font-medium text-sm">Role: First Author</p>
-                <p class="text-gray-500 text-sm mt-1">
-                    DOI: <a href="https://doi.org/10.1109/QPAIN66474.2025.11172256" target="_blank" class="text-indigo-600 hover:text-accent-blue underline">10.1109/QPAIN66474.2025.11172256</a>
-                </p>
-            </div>
-
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">YOLO11 for High Accuracy Real-Time Detection and Classification of Diverse E-Waste Categories: Enhancing Recycling Efficiency</p>
-                <p class="text-primary-blue font-medium text-sm">Status: Accepted to the Engineering Reports journal | Role: Co-Author</p>
-            </div>
-
-
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">2. Under Review</h4>
-            
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">Cervical Cancer Detection Using Pap Smear Images with Deep Learning</p>
-                <p class="text-primary-blue font-medium text-sm">Journal: Journal of Medical Systems | Role: First Author</p>
-            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">YOLO11 for High Accuracy Real-Time Detection and Classification of Diverse E-Waste Categories: Enhancing Recycling Efficiency</p>
+                <p class="text-primary-blue font-medium text-sm">Status: Accepted to the Engineering Reports journal | Role: Co-Author</p>
+            </div>
 
 
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis & On Going Work</h4>
-            
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">FarmChat: An LLM RAG-powered Real-Time Tomato Leaf Disease Detection and Farmer Assistance in Bangla</p>
-                <p class="text-primary-blue font-medium text-sm">Status: Final year thesis work, yet to be submitted to a renowned journal.</p>
-            </div>
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG Signal Analysis Using Deep learning for the Alzheimer's Disease Classification.</p>
-            </div>
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">On Going Work: Deep learning Approach for the BPDP power demand forecasting.</p>
-            </div>
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">On Going Work: Breast cancer classification using microscopic images leveraging computer vision model.</p>
-            </div>
-            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
-                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG signal images classification using multimodal models.</p>
-            </div>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">2. Under Review</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">Cervical Cancer Detection Using Pap Smear Images with Deep Learning</p>
+                <p class="text-primary-blue font-medium text-sm">Journal: Journal of Medical Systems | Role: First Author</p>
+            </div>
 
-        </section>
-        
-        <section id="projects" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Undergraduate Projects</h3>
-            
-            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
-                <h4 class="text-xl font-bold">IoT-based automatic car accident detection and sending a rescue message</h4>
-                <p class="text-primary-blue font-medium text-sm">Course Project</p>
-                <p class="text-gray-700 text-sm mt-2">Developed an automated system utilizing IoT sensors to instantly detect car accidents and transmit rescue messages with location data, improving emergency response times.</p>
-            </div>
 
-            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
-                <h4 class="text-xl font-bold">Portable wind turbine generator for mobile and low-wattage charging device</h4>
-                <p class="text-primary-blue font-medium text-sm">Competitive Project</p>
-                <p class="text-gray-700 text-sm mt-2">Designed and constructed a compact, portable wind turbine generator optimized for charging mobile phones and other low-wattage devices in off-grid locations.</p>
-            </div>
-        </section>
-        
-        <section id="skills" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Technical Skills</h3>
-            
-            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Machine Learning & Deep Learning (Core Expertise)</h4>
-            <div class="flex flex-wrap gap-3 mb-6">
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">PyTorch</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">TensorFlow</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Scikit-learn</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">LLM / LangChain</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">YOLOv5–v11</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">OpenCV / DETR / Detectron2</span>
-            </div>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">3. Working Paper/Thesis & On Going Work</h4>
+            
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">FarmChat: An LLM RAG-powered Real-Time Tomato Leaf Disease Detection and Farmer Assistance in Bangla</p>
+                <p class="text-primary-blue font-medium text-sm">Status: Final year thesis work, yet to be submitted to a renowned journal.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG Signal Analysis Using Deep learning for the Alzheimer's Disease Classification.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: Deep learning Approach for the BPDP power demand forecasting.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: Breast cancer classification using microscopic images leveraging computer vision model.</p>
+            </div>
+            <div class="mb-5 p-4 border-l-4 border-gray-200 transition hover:border-primary-blue duration-300">
+                <p class="text-lg font-semibold text-gray-800">On Going Work: EEG signal images classification using multimodal models.</p>
+            </div>
 
-            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Programming & Soft Tools</h4>
-            <div class="flex flex-wrap gap-3 mb-6">
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Python</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">MATLAB</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">C/C++</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">VS Code / PyCharm / Colab</span>
-            </div>
+        </section>
+        
+        <section id="projects" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Undergraduate Projects</h3>
+            
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-xl font-bold">IoT-based automatic car accident detection and sending a rescue message</h4>
+                <p class="text-primary-blue font-medium text-sm">Course Project</p>
+                <p class="text-gray-700 text-sm mt-2">Developed an automated system utilizing IoT sensors to instantly detect car accidents and transmit rescue messages with location data, improving emergency response times.</p>
+            </div>
 
-            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Simulation & Engineering Tools</h4>
-            <div class="flex flex-wrap gap-3">
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Proteus</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">AutoCAD</span>
-                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Microsoft Office Suite</span>
-            </div>
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-xl font-bold">Portable wind turbine generator for mobile and low-wattage charging device</h4>
+                <p class="text-primary-blue font-medium text-sm">Competitive Project</p>
+                <p class="text-gray-700 text-sm mt-2">Designed and constructed a compact, portable wind turbine generator optimized for charging mobile phones and other low-wattage devices in off-grid locations.</p>
+            </div>
+        </section>
+        
+        <section id="skills" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Technical Skills</h3>
+            
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Machine Learning & Deep Learning (Core Expertise)</h4>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">PyTorch</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">TensorFlow</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Scikit-learn</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">LLM / LangChain</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">YOLOv5–v11</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">OpenCV / DETR / Detectron2</span>
+            </div>
 
-        </section>
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Programming & Soft Tools</h4>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Python</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">MATLAB</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">C/C++</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">VS Code / PyCharm / Colab</span>
+            </div>
 
-        <section id="training" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-2xl font-semibold">Training & Activities</h3>
-            
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Industrial Training</h4>
-            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
-                <h4 class="text-lg font-bold">Training Institute for Chemical Industries (TICI)</h4>
-                <p class="text-primary-blue font-medium text-sm">Narsingdi, Bangladesh</p>
-                <span class="text-sm text-gray-500 font-light">January 18 – 30, 2025</span>
-            </div>
+            <h4 class="text-lg font-semibold text-gray-700 mt-4 mb-3">Simulation & Engineering Tools</h4>
+            <div class="flex flex-wrap gap-3">
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Proteus</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">AutoCAD</span>
+                <span class="inline-block bg-primary-blue text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-md">Microsoft Office Suite</span>
+            </div>
 
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1" id="activities">Extra Co-curricular Activities</h4>
-            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700 text-base">
-                <li><strong>Competition:</strong>Participated twice in **IIEC TECHNOCRATS (V.1 and V.2)**.</li>
-                <li><strong>IoT Training:</strong>Completed 1-3 segments of the Robotics course from Roboment Bangladesh (Online).</li>
-                <li><strong>Workshop:</strong>Attended the Leadership and Communicative Skills Development Training by Inspiration for Human Welfare.</li>
-            </ul>
-        </section>
+        </section>
 
-    </main>
+        <section id="training" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-2xl font-semibold">Training & Activities</h3>
+            
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Industrial Training</h4>
+            <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
+                <h4 class="text-lg font-bold">Training Institute for Chemical Industries (TICI)</h4>
+                <p class="text-primary-blue font-medium text-sm">Narsingdi, Bangladesh</p>
+                <span class="text-sm text-gray-500 font-light">January 18 – 30, 2025</span>
+            </div>
 
-    <footer id="contact" class="bg-gray-800 text-white py-8 mt-8">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h3 class="text-2xl font-bold mb-3">Let's Connect</h3>
-            <p class="text-gray-400 mb-6">I am actively seeking research opportunities where I can apply my <strong>ML/DL expertise</strong> to biomedical imaging, agricultural solutions, and microgrid optimization. Feel free to reach out to discuss potential collaborations!</p>
-            
-            <div class="flex justify-center space-x-6 text-3xl">
-                <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
-                </a>
-                <a href="mailto:roni.19eee132@gstu.edu.bd" class="text-gray-400 hover:text-primary-blue transition-colors">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                </a>
-            </div>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1" id="activities">Extra Co-curricular Activities</h4>
+            <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700 text-base">
+                <li><strong>Competition:</strong>Participated twice in **IIEC TECHNOCRATS (V.1 and V.2)**.</li>
+                <li><strong>IoT Training:</strong>Completed 1-3 segments of the Robotics course from Roboment Bangladesh (Online).</li>
+                <li><strong>Workshop:</strong>Attended the Leadership and Communicative Skills Development Training by Inspiration for Human Welfare.</li>
+            </ul>
+        </section>
 
-            <p class="text-xs text-gray-500 mt-6">
-                &copy; <span id="current-year-footer"></span> Roni Khan. All rights reserved.
-            </p>
-        </div>
-    </footer>
+    </main>
 
-    <script>
-        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
-        
-        let activeSectionId = 'gallery';
-        const carousel = document.getElementById('gallery-carousel');
-        const slides = document.querySelectorAll('.gallery-slide');
-        const dotsContainer = document.getElementById('gallery-dots');
-        let currentSlide = 0;
-        const slideIntervalTime = 6000; // 6 seconds
-        let slideInterval;
+    <footer id="contact" class="bg-gray-800 text-white py-8 mt-8">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-3">Let's Connect</h3>
+            <p class="text-gray-400 mb-6">I am actively seeking research opportunities where I can apply my <strong>ML/DL expertise</strong> to biomedical imaging, agricultural solutions, and microgrid optimization. Feel free to reach out to discuss potential collaborations!</p>
+            
+            <div class="flex justify-center space-x-6 text-3xl">
+                <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.5 2.5s-2.5-1.119-2.5-2.5 1.11-2.5 2.5-2.5 2.5 1.119 2.5 2.5zm-.447 5.5h-4.137v13h4.137v-13zm-2.063 0c-2.31 0-3.92 1.371-4.52 2.768v-2.768h-4.137v13h4.137c.01-.194.02-1.39.02-1.39l.04.148c.19 1.36 1.38 3.01 4.54 3.01 4.1 0 7.15-2.28 7.15-6.6 0-3.61-2.43-5.5-5.96-5.5zM20 12v-1c0-1.25-.01-2.5-.02-3.75-.01-1.25-.02-2.5-.03-3.75.01-.12.02-.25.03-.37l-3.23.01h-4.04l-.01-3.15c0-1.25.01-2.5.02-3.75l.01-3.75h-.02l-3.52-.01c-1.25 0-2.5.01-3.75.02s-2.5.03-3.75.04l-2.02.01h-.03l-3.37-.02v-.03z"/></svg>
+                </a>
+                <a href="mailto:roni.19eee132@gstu.edu.bd" class="text-gray-400 hover:text-primary-blue transition-colors">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                </a>
+            </div>
 
-        /**
-         * Toggles section visibility and updates navigation highlighting.
-         */
-        function navigateToSection(targetId) {
-            // Stop the carousel when navigating away from the gallery
-            if (activeSectionId === 'gallery' && targetId !== 'gallery') {
-                clearInterval(slideInterval);
-            }
-            
-            // Hide the currently active section
-            if (activeSectionId) {
-                const currentSection = document.getElementById(activeSectionId);
-                if (currentSection) {
-                    currentSection.style.display = 'none';
-                }
-            }
+            <p class="text-xs text-gray-500 mt-6">
+                &copy; <span id="current-year-footer"></span> Roni Khan. All rights reserved.
+            </p>
+        </div>
+    </footer>
 
-            // Show the new target section
-            const newSection = document.getElementById(targetId);
-            if (newSection) {
-                newSection.style.display = 'block';
-                activeSectionId = targetId;
-            }
+    <script>
+        document.getElementById('current-year-footer').textContent = new Date().getFullYear();
+        
+        let activeSectionId = 'gallery';
+        const carousel = document.getElementById('gallery-carousel');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dotsContainer = document.getElementById('gallery-dots');
+        let currentSlide = 0;
+        const slideIntervalTime = 6000; // 6 seconds
+        let slideInterval;
 
-            // Restart the carousel if navigating back to the gallery
-            if (targetId === 'gallery') {
-                startCarousel();
-            }
+        /**
+         * Toggles section visibility and updates navigation highlighting.
+         */
+        function navigateToSection(targetId) {
+            // Stop the carousel when navigating away from the gallery
+            if (activeSectionId === 'gallery' && targetId !== 'gallery') {
+                clearInterval(slideInterval);
+            }
+            
+            // Hide the currently active section
+            if (activeSectionId) {
+                const currentSection = document.getElementById(activeSectionId);
+                if (currentSection) {
+                    currentSection.style.display = 'none';
+                }
+            }
 
-            // Update active state in navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                // Reset styling
-                item.classList.remove('font-bold', 'text-primary-blue');
-                item.classList.add('text-gray-600', 'hover:text-primary-blue');
+            // Show the new target section
+            const newSection = document.getElementById(targetId);
+            if (newSection) {
+                newSection.style.display = 'block';
+                activeSectionId = targetId;
+            }
 
-                if (item.getAttribute('data-section') === targetId) {
-                    item.classList.add('font-bold', 'text-primary-blue');
-                    item.classList.remove('text-gray-600');
-                }
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' }); 
-        }
+            // Restart the carousel if navigating back to the gallery
+            if (targetId === 'gallery') {
+                startCarousel();
+            }
 
-        /* --- Carousel (Gallery) Logic --- */
+            // Update active state in navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                // Reset styling
+                item.classList.remove('font-bold', 'text-primary-blue');
+                item.classList.add('text-gray-600', 'hover:text-primary-blue');
 
-        /**
-         * Updates the carousel position and dot indicators.
-         */
-        function updateCarousel(index) {
-            if (index >= slides.length) {
-                index = 0;
-            } else if (index < 0) {
-                index = slides.length - 1;
-            }
-            currentSlide = index;
-            const offset = -currentSlide * 100;
-            carousel.style.transform = `translateX(${offset}%)`;
+                if (item.getAttribute('data-section') === targetId) {
+                    item.classList.add('font-bold', 'text-primary-blue');
+                    item.classList.remove('text-gray-600');
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
 
-            // Update dots
-            document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
-                dot.classList.remove('bg-primary-blue');
-                dot.classList.add('bg-gray-300');
-                if (i === currentSlide) {
-                    dot.classList.add('bg-primary-blue');
-                    dot.classList.remove('bg-gray-300');
-                }
-            });
-        }
-        
-        /**
-         * Generates navigation dots.
-         */
-        function createDots() {
-            slides.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.classList.add('gallery-dot', 'w-3', 'h-3', 'rounded-full', 'cursor-pointer', 'transition-colors');
-                dot.setAttribute('data-slide', index);
-                dot.onclick = () => {
-                    updateCarousel(index);
-                    resetInterval(); // Reset timer on manual click
-                };
-                dotsContainer.appendChild(dot);
-            });
-            updateCarousel(0); // Initial dot setup
-        }
+        /* --- Carousel (Gallery) Logic --- */
 
-        /**
-         * Moves to the next slide automatically.
-         */
-        function nextSlide() {
-            updateCarousel(currentSlide + 1);
-        }
+        /**
+         * Updates the carousel position
+         */
+        function updateCarousel() {
+            const offset = -currentSlide * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
 
-        /**
-         * Stops the current timer and starts a new one.
-         */
-        function resetInterval() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, slideIntervalTime);
-        }
+        /**
+         * Advances to the next slide, looping to the start if necessary.
+         */
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
 
-        /**
-         * Starts the automatic sliding.
-         */
-        function startCarousel() {
-            if (slides.length > 1) {
-                resetInterval();
-            }
-        }
+        /**
+         * Initializes and manages the carousel dots.
+         */
+        function initDots() {
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-white', 'opacity-50', 'cursor-pointer', 'transition-opacity');
+                dot.setAttribute('data-slide', index);
+                dot.onclick = () => {
+                    currentSlide = index;
+                    updateCarousel();
+                    // Reset the auto-slide timer on manual click
+                    clearInterval(slideInterval);
+                    startCarousel();
+                };
+                dotsContainer.appendChild(dot);
+            });
+        }
 
-        /* --- Lightbox (Full-Screen Image) Logic --- */
+        /**
+         * Updates the visual state of the dots.
+         */
+        function updateDots() {
+            dotsContainer.querySelectorAll('span').forEach((dot, index) => {
+                dot.classList.remove('opacity-100', 'bg-primary-blue');
+                dot.classList.add('opacity-50', 'bg-white');
+                if (index === currentSlide) {
+                    dot.classList.add('opacity-100', 'bg-primary-blue');
+                    dot.classList.remove('bg-white');
+                }
+            });
+        }
 
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const lightboxCaption = document.getElementById('lightbox-caption');
+        /**
+         * Starts the automatic slide transition.
+         */
+        function startCarousel() {
+            // Clear any existing interval to prevent duplicates
+            clearInterval(slideInterval); 
+            slideInterval = setInterval(nextSlide, slideIntervalTime);
+        }
+        
+        
+        /* --- UPDATED Lightbox (Full-Screen Image) Logic --- */
 
-        function openLightbox(imageSrc, captionText) {
-            lightbox.style.display = "block";
-            lightboxContent.src = imageSrc;
-            lightboxCaption.innerHTML = captionText;
-            document.body.style.overflow = 'hidden'; // Prevent scrolling the main page
-        }
+        const lightbox = document.getElementById('lightbox');
+        // Targeted element is now 'lightbox-image' instead of 'lightbox-content'
+        const lightboxImage = document.getElementById('lightbox-image'); 
+        const lightboxCaption = document.getElementById('lightbox-caption');
 
-        function closeLightbox() {
-            lightbox.style.display = "none";
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
+        function openLightbox(imageSrc, captionText) {
+            lightbox.style.display = "flex"; // Use flex to enable centering
+            lightboxImage.src = imageSrc;
+            lightboxCaption.innerHTML = captionText;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling the main page
+            clearInterval(slideInterval); // Stop carousel when lightbox opens
+        }
 
-        // Close lightbox when clicking outside the image
-        lightbox.onclick = function(e) {
-            if (e.target.id === 'lightbox') {
-                closeLightbox();
-            }
-        }
+        function closeLightbox() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            // Only restart the carousel if the gallery section is still active
+            if (activeSectionId === 'gallery') {
+                startCarousel();
+            }
+        }
 
-        /* --- Initialization --- */
+        // Close lightbox when clicking outside the content
+        lightbox.onclick = function(e) {
+            // Only close if the click target is the background (#lightbox) itself
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                closeLightbox();
+            }
+        }
+        /* --- End Lightbox Logic --- */
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navigation event listeners
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.getAttribute('data-section');
-                    navigateToSection(targetId);
-                });
-            });
-            
-            // Set initial state
-            const allSections = document.querySelectorAll('.content-section');
-            allSections.forEach(section => {
-                section.style.display = 'none';
-            });
-            
-            // Explicitly show the default active section ('gallery')
-            const defaultSection = document.getElementById(activeSectionId);
-            if (defaultSection) {
-                defaultSection.style.display = 'block';
-            }
-            
-            // Set initial navigation highlight for 'gallery'
-            const defaultNavItem = document.querySelector(`.nav-item[data-section="${activeSectionId}"]`);
-            if (defaultNavItem) {
-                defaultNavItem.classList.add('font-bold', 'text-primary-blue');
-                defaultNavItem.classList.remove('text-gray-600');
-            }
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up navigation listeners
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const targetSection = e.target.getAttribute('data-section');
+                    navigateToSection(targetSection);
+                });
+            });
 
-            // Start the gallery carousel
-            createDots();
-            startCarousel();
-        });
-    </script>
+            // Initial view setup
+            document.getElementById('gallery').style.display = 'block';
+            initDots();
+            updateCarousel(); // Show the first slide and dots initially
+            startCarousel(); // Start the auto-slide
+        });
+
+    </script>
 </body>
 </html>
