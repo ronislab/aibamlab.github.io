@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roni Khan - Professional Portfolio</title>
-    <!-- Tailwind CSS is loaded synchronously here, which is typical for development/single-file demos. For production, a build process would be faster. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -22,7 +21,6 @@
             },
         };
     </script>
-    <!-- Google Fonts link is critical for FOUT (Flash of Unstyled Text) reduction, so keeping it in the head. -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         /* General performance/aesthetics styles */
@@ -62,107 +60,169 @@
         .content-section {
             display: none;
         }
+
+        /* --- New/Modified CSS for Gallery & Modal (Lightbox) --- */
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .gallery-slide {
+            min-width: 100%;
+            transition: transform 0.8s ease-in-out; /* Slide speed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Modal (Lightbox) Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        #lightbox-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s ease-out;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        /* --- End Gallery CSS --- */
     </style>
 </head>
 <body class="bg-secondary-gray font-sans text-gray-800">
 
     <header class="bg-white shadow-lg sticky top-0 z-20">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between">
             
-            <h1 class="text-2xl font-extrabold text-primary-blue mx-auto">
+            <h1 class="text-2xl font-extrabold text-primary-blue mb-2 sm:mb-0">
                 Roni Khan
             </h1>
             
-            <!-- Added 'training' to navigation and made more items visible on mobile to improve discoverability -->
-            <nav id="main-nav" class="flex-grow flex justify-end space-x-2 sm:space-x-4 text-sm font-medium">
-                <a href="javascript:void(0);" data-section="gallery" class="nav-item text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
-                <a href="javascript:void(0);" data-section="profile" class="nav-item text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
-                <a href="javascript:void(0);" data-section="education" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Education</a>
-                <a href="javascript:void(0);" data-section="research" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Research</a>
-                <a href="javascript:void(0);" data-section="projects" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
-                <a href="javascript:void(0);" data-section="skills" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Skills</a>
-                <a href="javascript:void(0);" data-section="training" class="nav-item text-gray-600 hover:text-primary-blue transition-colors hidden sm:inline">Training</a>
+            <nav id="main-nav" class="w-full sm:w-auto flex justify-center sm:justify-end space-x-3 text-sm font-medium overflow-x-auto py-1">
+                <a href="javascript:void(0);" data-section="gallery" class="nav-item whitespace-nowrap px-2 text-primary-blue hover:text-accent-blue transition-colors font-bold">Gallery</a>
+                <a href="javascript:void(0);" data-section="profile" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Profile</a>
+                <a href="javascript:void(0);" data-section="education" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Education</a>
+                <a href="javascript:void(0);" data-section="research" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors">Research</a>
+                <a href="javascript:void(0);" data-section="projects" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Projects</a>
+                <a href="javascript:void(0);" data-section="skills" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Skills</a>
+                <a href="javascript:void(0);" data-section="training" class="nav-item whitespace-nowrap px-2 text-gray-600 hover:text-primary-blue transition-colors hidden md:inline">Training</a>
             </nav>
         </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
 
-        <section id="gallery" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
-            <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline: Achievements, Projects & Memories</h3>
-            <p class="text-gray-600 mb-8">This gallery showcases a mix of my technical project results, academic achievements, university memories, and personal work time.</p>
+        <section id="gallery" class="content-section bg-white p-6 md:p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
+            <h3 class="section-header text-3xl font-bold text-gray-900">Visual Timeline</h3>
+            <p class="text-gray-600 mb-6">A rotating selection showcasing my academic journey, project milestones, and important achievements over time. Click any image to view it full screen.</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                
-                <!-- OPTIMIZATION: Replaced local image path with placeholder and added loading="lazy" -->
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="./friend's.jpg" target="_blank" title="View Full Image">
-                        <img src="./friend's.jpg" 
-                             alt="University Memory Image" 
-                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
-                             loading="lazy"
+            <div class="gallery-container w-full h-[400px] shadow-2xl relative">
+                <div id="gallery-carousel" class="flex h-full" style="width: 400%;">
+                    
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="./friend's.jpg"  
+                             alt="University Memory Image"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('./friend's.jpg', 'Campus Life & Memories')"
+                             loading="eager"
                         >
-                    </a>
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-800 text-base">Campus Life & Memories</p>
-                        <p class="text-xs text-gray-500 mt-1">A photo with friends or classmates from a memorable university event.</p>
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Campus Life & Memories</p>
+                            <p class="text-sm text-gray-500 mt-1">A memorable photo with friends from a university event.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- OPTIMIZATION: Replaced local image path with placeholder and added loading="lazy" -->
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="./thesis.jpg" target="_blank" title="View Full Image">
-                        <img src="./thesis.jpg" 
-                             alt="Thesis signature" 
-                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="./thesis.jpg"  
+                             alt="Thesis signature"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('./thesis.jpg', 'Thesis Submission Moment')"
                              loading="lazy"
                         >
-                    </a>
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-800 text-base">Thesis Signature</p>
-                        <p class="text-xs text-gray-500 mt-1">A photo of me or my thesis supervisor.</p>
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Thesis Submission Moment</p>
+                            <p class="text-sm text-gray-500 mt-1">A photo related to my final year thesis work and supervisor.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- OPTIMIZATION: Added loading="lazy" to existing placeholder -->
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award" target="_blank" title="View Full Image">
-                        <img src="https://placehold.co/400x250/FBBF24/ffffff?text=Achievement+Award" 
-                             alt="Achievement/Award Image Placeholder" 
-                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award"  
+                             alt="Achievement/Award Image Placeholder"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('https://placehold.co/800x500/FBBF24/ffffff?text=Achievement+Award', 'IIEC TECHNOCRATS Participation Award')"
                              loading="lazy"
                         >
-                    </a>
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-800 text-base">IIEC TECHNOCRATS Participation</p>
-                        <p class="text-xs text-gray-500 mt-1">Photo from the competition or certificate ceremony.</p>
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">IIEC TECHNOCRATS Participation</p>
+                            <p class="text-sm text-gray-500 mt-1">Certificate or image from the competition ceremony.</p>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- OPTIMIZATION: Added loading="lazy" to existing placeholder -->
-                <div class="rounded-xl overflow-hidden shadow-lg bg-gray-50 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <a href="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output" target="_blank" title="View Full Image">
-                        <img src="https://placehold.co/400x250/9CA3AF/ffffff?text=Deep+Learning+Output" 
-                             alt="Deep Learning Segmentation Result Placeholder" 
-                             class="w-full h-40 object-cover border-b border-gray-200 cursor-pointer"
+                    
+                    <div class="gallery-slide bg-gray-50 flex-shrink-0">
+                        <img src="https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output"  
+                             alt="Deep Learning Segmentation Result Placeholder"  
+                             class="w-full h-80 object-cover border-b border-gray-200 cursor-pointer"
+                             onclick="openLightbox('https://placehold.co/800x500/9CA3AF/ffffff?text=Deep+Learning+Output', 'Research Visualization: Deep Learning Output')"
                              loading="lazy"
                         >
-                    </a>
-                    <div class="p-4">
-                        <p class="font-semibold text-gray-800 text-base">Research Visualization </p>
-                        <p class="text-xs text-gray-500 mt-1">A key result visualization from a published paper (e.g., tumor segmentation).</p>
+                        <div class="p-4 w-full text-center">
+                            <p class="font-semibold text-gray-800 text-lg">Research Visualization</p>
+                            <p class="text-sm text-gray-500 mt-1">A key result visualization from a published paper.</p>
+                        </div>
                     </div>
-                </div>
 
+                </div>
+                <div id="gallery-dots" class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+                    </div>
             </div>
         </section>
 
+        <div id="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-content">
+            <div id="lightbox-caption" class="text-white text-center p-4 mt-5 text-lg"></div>
+        </div>
+
         <section id="profile" class="content-section bg-white p-8 md:p-10 rounded-xl shadow-2xl mb-12 border-t-8 border-primary-blue transition duration-300 card-hover">
-            <h3 class="section-header text-3xl font-bold text-gray-900"></h3>
+            <h3 class="section-header text-3xl font-bold text-gray-900">My Story & Professional Focus</h3>
             <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mt-6">
                 
                 <div class="flex-shrink-0 flex flex-col items-center">
-                    <!-- OPTIMIZATION: Replaced local image path with responsive placeholder URL and used srcset -->
                     <img 
                         id="profile-image"
                         src="./image.jpeg" 
@@ -176,7 +236,7 @@
                     <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1">Roni Khan</h2>
                     
                     <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        A highly motivated student, specializing in the convergence of Deep Learning, Machine Learning in the Biomedical Engineering and Sustainable Agriculture fields. I am actively seeking research opportunities to leverage AI for impactful engineering solutions.
+                        I am a highly dedicated individual, passionate about harnessing the power of Deep Learning and Machine Learning. My research lies at the intersection of Biomedical Engineering and Sustainable Agriculture, where I seek to create real-world, impactful solutions. I'm driven by the desire to build innovative AI systems and am currently seeking <strong>research opportunities</strong> to apply my computational skills to complex engineering problems.
                     </p>
 
                     <div class="flex flex-wrap justify-center md:justify-start gap-3 text-sm font-medium mt-4">
@@ -199,22 +259,21 @@
             </div>
         </section>
 
-
         <section id="interests" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Core Research Interests</h3>
             <p class="text-gray-700 leading-relaxed mb-4">
-                My work focuses on applying advanced computational techniques to solve pressing challenges in engineering and life sciences, specifically:
+                My passion is solving real-world engineering and life science problems using advanced computation. My current focus areas are:
             </p>
             <div class="flex flex-wrap gap-3">
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Biomedical Engineering</span>
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Sustainable Agriculture</span>
-                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Microgrid Optimization</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Biomedical Imaging & Deep Learning</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">AI for Sustainable Agriculture</span>
+                <span class="bg-indigo-100 text-primary-blue text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">Microgrid Energy Optimization</span>
             </div>
 
             <h4 class="text-xl font-bold mt-8 mb-2 text-gray-700">Language Proficiency</h4>
             <ul class="list-disc ml-5 text-gray-700 space-y-1">
-                <li><strong>Bangla:</strong> Native Speaker</li>
-                <li><strong>English:</strong> Fluent (Reading, Writing, Listening, Speaking)</li>
+                <li><strong>Bangla:</strong>Native Speaker</li>
+                <li><strong>English:</strong> Fully Fluent (Professional and Academic Contexts)</li>
             </ul>
         </section>
 
@@ -230,7 +289,7 @@
                     <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">September 2025</span>
                 </div>
                 <p class="text-gray-700 text-sm mt-2">
-                    <strong>CGPA: 3.89 out of 4.00</strong> (1st position in the batch)
+                    CGPA: 3.89 out of 4.00 (1st position in the batch)
                 </p>
             </div>
 
@@ -243,7 +302,7 @@
                     <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">June 2018</span>
                 </div>
                 <p class="text-gray-700 text-sm mt-2">
-                    <strong>GPA: 4.08 OUT OF 5.00</strong>
+                    GPA: 4.08 out of 5.00
                 </p>
             </div>
 
@@ -256,7 +315,7 @@
                     <span class="text-sm text-gray-500 font-light mt-1 sm:mt-0">April 2016</span>
                 </div>
                 <p class="text-gray-700 text-sm mt-2">
-                    <strong>GPA: 3.94 out of 5.00</strong>
+                    GPA: 3.94 out of 5.00
                 </p>
             </div>
             
@@ -359,18 +418,18 @@
         <section id="training" class="content-section bg-white p-8 rounded-xl shadow-lg mb-12 transition duration-300 card-hover">
             <h3 class="section-header text-2xl font-semibold">Training & Activities</h3>
             
-            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Training</h4>
+            <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1">Industrial Training</h4>
             <div class="mb-6 p-4 border-l-4 border-gray-200 bg-secondary-gray/50 rounded-lg transition hover:border-primary-blue duration-300">
-                <h4 class="text-lg font-bold">Industrial Training</h4>
-                <p class="text-primary-blue font-medium text-sm">Training Institute for Chemical Industries (TICI), Narsingdi, Bangladesh</p>
+                <h4 class="text-lg font-bold">Training Institute for Chemical Industries (TICI)</h4>
+                <p class="text-primary-blue font-medium text-sm">Narsingdi, Bangladesh</p>
                 <span class="text-sm text-gray-500 font-light">January 18 – 30, 2025</span>
             </div>
 
             <h4 class="text-xl font-bold text-gray-700 mt-6 mb-3 border-b pb-1" id="activities">Extra Co-curricular Activities</h4>
             <ul class="list-disc ml-5 mt-2 space-y-1 text-gray-700 text-base">
-                <li><strong>Competition:</strong> Participated two times in <strong>IIEC TECHNOCRATS (V.1 and V.2)</strong>.</li>
-                <li><strong>IoT Training:</strong> Completed 1-3 segments of the Robotics course from Roboment Bangladesh (Online).</li>
-                <li><strong>Workshop:</strong> Attended the Leadership and Communicative Skills Development Training by Inspiration for Human Welfare.</li>
+                <li><strong>Competition:</strong>Participated twice in **IIEC TECHNOCRATS (V.1 and V.2)**.</li>
+                <li><strong>IoT Training:</strong>Completed 1-3 segments of the Robotics course from Roboment Bangladesh (Online).</li>
+                <li><strong>Workshop:</strong>Attended the Leadership and Communicative Skills Development Training by Inspiration for Human Welfare.</li>
             </ul>
         </section>
 
@@ -379,7 +438,7 @@
     <footer id="contact" class="bg-gray-800 text-white py-8 mt-8">
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h3 class="text-2xl font-bold mb-3">Let's Connect</h3>
-            <p class="text-gray-400 mb-6">I am actively seeking research opportunities in ML/DL implemenation for the biomedical imaging, agriculture and microgrid optimization. Feel free to reach out!</p>
+            <p class="text-gray-400 mb-6">I am actively seeking research opportunities where I can apply my <strong>ML/DL expertise</strong> to biomedical imaging, agricultural solutions, and microgrid optimization. Feel free to reach out to discuss potential collaborations!</p>
             
             <div class="flex justify-center space-x-6 text-3xl">
                 <a href="https://linkedin.com/in/roni-khan-5478352a8" target="_blank" class="text-gray-400 hover:text-primary-blue transition-colors">
@@ -399,12 +458,23 @@
     <script>
         document.getElementById('current-year-footer').textContent = new Date().getFullYear();
         
-        let activeSectionId = 'gallery'; 
+        let activeSectionId = 'gallery';
+        const carousel = document.getElementById('gallery-carousel');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dotsContainer = document.getElementById('gallery-dots');
+        let currentSlide = 0;
+        const slideIntervalTime = 6000; // 6 seconds
+        let slideInterval;
 
         /**
          * Toggles section visibility and updates navigation highlighting.
          */
         function navigateToSection(targetId) {
+            // Stop the carousel when navigating away from the gallery
+            if (activeSectionId === 'gallery' && targetId !== 'gallery') {
+                clearInterval(slideInterval);
+            }
+            
             // Hide the currently active section
             if (activeSectionId) {
                 const currentSection = document.getElementById(activeSectionId);
@@ -420,22 +490,121 @@
                 activeSectionId = targetId;
             }
 
+            // Restart the carousel if navigating back to the gallery
+            if (targetId === 'gallery') {
+                startCarousel();
+            }
+
             // Update active state in navigation
             document.querySelectorAll('.nav-item').forEach(item => {
-                // Ensure all items are reset
-                item.classList.remove('font-bold', 'text-primary-blue', 'text-gray-600', 'hover:text-primary-blue');
+                // Reset styling
+                item.classList.remove('font-bold', 'text-primary-blue');
                 item.classList.add('text-gray-600', 'hover:text-primary-blue');
 
                 if (item.getAttribute('data-section') === targetId) {
                     item.classList.add('font-bold', 'text-primary-blue');
-                    item.classList.remove('text-gray-600'); // Remove gray if active
+                    item.classList.remove('text-gray-600');
                 }
             });
             window.scrollTo({ top: 0, behavior: 'smooth' }); 
         }
+
+        /* --- Carousel (Gallery) Logic --- */
+
+        /**
+         * Updates the carousel position and dot indicators.
+         */
+        function updateCarousel(index) {
+            if (index >= slides.length) {
+                index = 0;
+            } else if (index < 0) {
+                index = slides.length - 1;
+            }
+            currentSlide = index;
+            const offset = -currentSlide * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+
+            // Update dots
+            document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+                dot.classList.remove('bg-primary-blue');
+                dot.classList.add('bg-gray-300');
+                if (i === currentSlide) {
+                    dot.classList.add('bg-primary-blue');
+                    dot.classList.remove('bg-gray-300');
+                }
+            });
+        }
         
-        // Attach event listeners to navigation items on load
+        /**
+         * Generates navigation dots.
+         */
+        function createDots() {
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('gallery-dot', 'w-3', 'h-3', 'rounded-full', 'cursor-pointer', 'transition-colors');
+                dot.setAttribute('data-slide', index);
+                dot.onclick = () => {
+                    updateCarousel(index);
+                    resetInterval(); // Reset timer on manual click
+                };
+                dotsContainer.appendChild(dot);
+            });
+            updateCarousel(0); // Initial dot setup
+        }
+
+        /**
+         * Moves to the next slide automatically.
+         */
+        function nextSlide() {
+            updateCarousel(currentSlide + 1);
+        }
+
+        /**
+         * Stops the current timer and starts a new one.
+         */
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, slideIntervalTime);
+        }
+
+        /**
+         * Starts the automatic sliding.
+         */
+        function startCarousel() {
+            if (slides.length > 1) {
+                resetInterval();
+            }
+        }
+
+        /* --- Lightbox (Full-Screen Image) Logic --- */
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        function openLightbox(imageSrc, captionText) {
+            lightbox.style.display = "block";
+            lightboxContent.src = imageSrc;
+            lightboxCaption.innerHTML = captionText;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling the main page
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = "none";
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close lightbox when clicking outside the image
+        lightbox.onclick = function(e) {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        }
+
+        /* --- Initialization --- */
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Navigation event listeners
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
                 item.addEventListener('click', (e) => {
@@ -445,14 +614,14 @@
                 });
             });
             
-            // Initial load logic
+            // Set initial state
             const allSections = document.querySelectorAll('.content-section');
             allSections.forEach(section => {
                 section.style.display = 'none';
             });
             
-            // Explicitly show the default active section (gallery)
-            const defaultSection = document.getElementById(activeSectionId); // 'gallery' is the initial value
+            // Explicitly show the default active section ('gallery')
+            const defaultSection = document.getElementById(activeSectionId);
             if (defaultSection) {
                 defaultSection.style.display = 'block';
             }
@@ -463,6 +632,10 @@
                 defaultNavItem.classList.add('font-bold', 'text-primary-blue');
                 defaultNavItem.classList.remove('text-gray-600');
             }
+
+            // Start the gallery carousel
+            createDots();
+            startCarousel();
         });
     </script>
 </body>
